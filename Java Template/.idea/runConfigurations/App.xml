@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="App" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="de.hnu.App" />
+    <module name="carsharing" />
+    <option name="VM_PARAMETERS" value="--module-path &quot;${MAVEN_REPOSITORY}\org\openjfx\javafx-controls\17.0.2;${MAVEN_REPOSITORY}\org\openjfx\javafx-graphics\17.0.2;${MAVEN_REPOSITORY}\org\openjfx\javafx-base\17.0.2&quot; --add-modules javafx.controls,javafx.fxml,javafx.graphics" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="de.hnu.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
