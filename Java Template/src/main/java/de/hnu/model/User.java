@@ -3,22 +3,46 @@ package de.hnu.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 /**
  * Model-Klasse für einen Benutzer.
- * POJO ohne JavaFX-Abhängigkeiten.
+ * JPA Entity mit Datenbankpersistierung.
  *
  * Der aktuelle Benutzer ist Samuel Klefe (simuliert).
  */
+@Entity
+@Table(name = "AppUser") // "User" ist oft ein reserviertes Keyword in SQL
 public class User {
 
+    @Id
+    @GeneratedValue
     private long id;
+
+    @Column(length=50)
     private String firstName;
+
+    @Column(length=50)
     private String lastName;
+
     private double rating; // 1.0 - 5.0
+
+    @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
     private List<Ride> favorites;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
+    private List<Ride> bookedRides; // Gebuchte Fahrten für "Previous Rides"
 
     public User() {
         this.favorites = new ArrayList<>();
+        this.bookedRides = new ArrayList<>();
     }
 
     public User(long id, String firstName, String lastName, double rating) {
@@ -27,6 +51,7 @@ public class User {
         this.lastName = lastName;
         this.rating = rating;
         this.favorites = new ArrayList<>();
+        this.bookedRides = new ArrayList<>();
     }
 
     // Getter und Setter
@@ -69,6 +94,14 @@ public class User {
 
     public void setFavorites(List<Ride> favorites) {
         this.favorites = favorites;
+    }
+
+    public List<Ride> getBookedRides() {
+        return bookedRides;
+    }
+
+    public void setBookedRides(List<Ride> bookedRides) {
+        this.bookedRides = bookedRides;
     }
 
     /**

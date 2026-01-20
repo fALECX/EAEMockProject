@@ -3,23 +3,42 @@ package de.hnu.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
 /**
  * Model-Klasse für eine Fahrt (Ride).
- * POJO ohne JavaFX-Abhängigkeiten.
+ * JPA Entity mit Datenbankpersistierung.
  *
  * Entspricht den Daten aus dem Balsamiq-Mockup (Page 120, 123).
  */
+@Entity
 public class Ride {
 
+    @Id
+    @GeneratedValue
     private long id;
+
+    @Column(length=50)
     private String driverName;
+
+    @Column(length=100)
     private String origin;
+
+    @Column(length=100)
     private String destination;
+
     private int distanceKm;
     private LocalDate date;
     private LocalTime time;
     private int availableSeats;
     private int driverRating; // 1-5 Sterne
+
+    @ManyToOne
+    private User driver; // Beziehung zum Fahrer
 
     public Ride() {
     }
@@ -110,6 +129,14 @@ public class Ride {
 
     public void setDriverRating(int driverRating) {
         this.driverRating = driverRating;
+    }
+
+    public User getDriver() {
+        return driver;
+    }
+
+    public void setDriver(User driver) {
+        this.driver = driver;
     }
 
     /**
